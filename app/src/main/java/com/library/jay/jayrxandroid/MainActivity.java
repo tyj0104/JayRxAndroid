@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setinit() {
+        System.out.print("test");
 
     }
 }
