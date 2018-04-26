@@ -18,7 +18,7 @@ import static io.reactivex.internal.functions.ObjectHelper.requireNonNull;
 
 /**
  * RxBus类，用于模块间通讯和解耦
- * Created by jay on 2016/12/5.
+ * Created by jay on 2017/1/5.
  */
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

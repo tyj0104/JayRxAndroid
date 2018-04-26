@@ -33,5 +33,6 @@ public class MainActivity extends BaseActivity {
                             mainBinding.tv.setText(str);
                         }
                 );
+
     }
 }
