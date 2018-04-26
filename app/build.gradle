@@ -69,6 +69,7 @@ dependencies {
             rootProject.ext.rxlifecycle2Components,
             rootProject.ext.rxpermissions2,
             rootProject.ext.dagger2,
+            rootProject.ext.rxbinding2,
             //Java
             rootProject.ext.commonsLang3,
             rootProject.ext.commonsCodec,
@@ -93,7 +94,8 @@ dependencies {
             rootProject.ext.dagger2Compiler,
             //End
     )
-
+    debugCompile rootProject.ext.leakcanaryDebug
+    releaseCompile rootProject.ext.leakcanaryRelease
     configurations.all {
         resolutionStrategy.force rootProject.ext.findbugs
     }
