@@ -1,21 +1,48 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin:'me.tatarka.retrolambda'
+
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "27.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "com.library.jay.jayrxandroid"
-        minSdkVersion 15
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+    }
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        abortOnError false
+    }
+    //去除包重复的类
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/rxjava.properties'
+    }
+//虚拟机内存为2G  反正OOM
+    dexOptions {
+        javaMaxHeapSize = '2g'
     }
 }
 
@@ -24,6 +51,51 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
+
     testCompile 'junit:junit:4.12'
+
+    compile(
+            //android 方法数超过65535
+            rootProject.ext.supportMultiDex,
+            //Android
+            rootProject.ext.supportDesign,
+            rootProject.ext.supportAppCompat,
+            rootProject.ext.supportCardView,
+            rootProject.ext.supportRecyclerView,
+            rootProject.ext.glide,
+            rootProject.ext.rxAndroid2,
+            rootProject.ext.rxlifecycle2,
+            rootProject.ext.rxlifecycle2Android,
+            rootProject.ext.rxlifecycle2Components,
+            rootProject.ext.rxpermissions2,
+            rootProject.ext.dagger2,
+            //Java
+            rootProject.ext.commonsLang3,
+            rootProject.ext.commonsCodec,
+            rootProject.ext.commonsIo,
+            rootProject.ext.guava,
+            rootProject.ext.gson,
+            rootProject.ext.rxJava2,
+            rootProject.ext.retrofit2,
+            rootProject.ext.retrofit2GsonConverter,
+            rootProject.ext.retrofit2Rxjava2Adapter,
+            rootProject.ext.okhttp3Logging,
+            //End
+    )
+    provided(
+            rootProject.ext.jsr250,
+            rootProject.ext.lombok,
+            rootProject.ext.dagger2Compiler,
+            //End
+    )
+    apt(
+            rootProject.ext.lombok,
+            rootProject.ext.dagger2Compiler,
+            //End
+    )
+
+    configurations.all {
+        resolutionStrategy.force rootProject.ext.findbugs
+    }
+
 }
