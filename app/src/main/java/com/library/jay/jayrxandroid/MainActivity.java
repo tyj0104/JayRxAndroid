@@ -34,5 +34,10 @@ public class MainActivity extends BaseActivity {
                         }
                 );
 
+        RxView.clicks(mainBinding.toSet).subscribe(
+                v ->{
+                    showAppSettingsDialog("打开",false);
+                }
+        );
     }
 }

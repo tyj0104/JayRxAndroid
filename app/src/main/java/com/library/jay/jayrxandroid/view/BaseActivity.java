@@ -2,6 +2,7 @@ package com.library.jay.jayrxandroid.view;
 
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -49,12 +50,25 @@ public class BaseActivity extends RxAppCompatActivity {
         return (new RxPermissions(this)).request(permissions).compose(this.bindToLifecycle());
     }
 
-    // TODO: 2017/11/29 设置  取笑
+
     public void showAppSettingsDialog(String message, boolean finishIfCancel) {
         Builder builder = new Builder(this);
         builder.setTitle("提示");
         builder.setMessage(message);
         builder.setCancelable(false);
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+       builder.setPositiveButton("设置", new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialogInterface, int i) {
+               openAppSettings();
+           }
+       });
      //  builder.setNegativeButton("取消", BaseActivity$$Lambda$1.lambdaFactory$(this, finishIfCancel));
       //builder.setPositiveButton("设置", BaseActivity$$Lambda$2.lambdaFactory$(this));
         builder.create().show();

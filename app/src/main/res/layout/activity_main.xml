@@ -17,9 +17,15 @@
         android:layout_height="wrap_content"
         android:text="Hello World!" />
     <Button
-        android:text="next to"
+        android:text="next_to"
         android:layout_centerInParent="true"
         android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="设置"
+        android:layout_alignBottom="@+id/btn"
+        android:id="@+id/to_set"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </RelativeLayout>
